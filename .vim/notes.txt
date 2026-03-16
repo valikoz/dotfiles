@@ -1,0 +1,319 @@
+*notes.txt*
+
+						     Last Change: March 16, 2026
+
+Vim reference manual notes.
+
+==============================================================================
+editing.txt
+
+|:wq| or |:x|	 Write (save) and quit
+|:wqa|	Write and quit on all open files
+
+|CTRL-^| |:e #| Jump to the last used buffer
+|gf|	Go to the file under cursor
+|gF|	Same as "gf", except if a number follows the file
+	name, then the cursor is positioned on that line in the file.
+|:w_c| >vim
+	"Write the current buffer to the stdin of an external command.
+	:w !tee
+<
+
+==============================================================================
+motion.txt
+
+|tx|	Go towards next occurrence of character `x` (stops right before it)
+|Tx|	Go towards previous occurence of character `x` (stops right before it)
+
+|ge|	Move cursor backwards to end of word (sequence of letters, digits,
+	underscores OR sequence of other symbols)
+|gE|	Move cursor backwards to end of WORD (any sequence of non-blank
+|g;|	Go to [count] older position in change list
+|g,|	Go to [count] newer position in change list
+|g?| {motion}	Rot13 encode {motion} text. (https://en.wikipedia.org/wiki/ROT13)
+
+|:mark|	Set mark {a-zA-Z'}.
+|:k|	Same as :mark, but the space before the mark name can
+			be omitted.
+
+|)|	Move cursor to next sentence
+|(|	Move cursor to previous sentence
+|}|	Move cursor to next paragraph (block of consecutive non-empty lines)
+|{|	Move cursor to previous paragraph (block of consecutive non-empty lines)
+
+Keywords: |paragraph| |sentence|
+
+|gg| |go| |gl|	Move cursor to first line of document
+|H|	Move cursor to line at the top of the window
+|M|	Move cursor to the line at the middle of the window
+|L|	Move cursor to the line at the bottom of the window
+
+|[(|	Go to previous unmatched (
+|[{|	Go to previous unmatched {
+|])|	Go to next unmatched )
+|]}|	Go to next unmatched }
+|]m|	Go to next start of method (Java like languages)
+|]M|	Go to next end of method
+|[m|	Go to previous start of method
+|[M|	Go to previous end of method
+
+|CTRL-O|	Go to the previous cursor position in the jump list
+|CTRL-I| |Tab|	Go to the next cursor position in the jump list
+
+|go|	Go to [count] byte in the buffer.
+|gj| |gk|	Move down or up in wrap line
+
+==============================================================================
+scroll.txt
+
+|CTRL-F|	Move cursor forwards one full screen
+|CTRL-B|	Move cursor backwards one full screen
+|CTRL-D|	Move cursor down half a screen
+|CTRL-U|	Move cursor up half a screen
+
+|zz|	Place current cursor line in the middle of the window
+|zt|	Place current cursor line at the top of the window
+|zb|	Place current cursor line at the bottom of the window
+|CTRL-E|	Scroll down a single line, leaving cursor in place
+|CTRL-Y|	Scroll up a single line, leaving cursor in place
+
+==============================================================================
+change.txt
+
+In Visual mode skip `g` at the start.
+
+|~|	Switch case of character under cursor and move cursor to the right
+|~{motion}|	Switch the case of the text that the {motion} command moves over
+|gu{motion}|	Change the text that the {motion} command moves over to lowercase
+|guu|	Make whole current line lower case
+|gU{motion}|	Change the text that the {motion} command moves over to uppercase
+|gUU|	Make whole current line upper case
+
+|:s_c|	Confirm each substitution.
+|:s_i|	Ignore case for the pattern.
+|:s_I|	Don't ignore case for the pattern.
+|&| |:s|	Repeats last substitute.
+|g&|	Global substitute.
+
+|at|	A block surrounded by xml/html tags, including the tags
+|it|	A block surrounded by xml/html tags, excluding the tags
+|ap|	A paragraph including the surrounding whitespace
+|ip|	A paragraph including the surrounding whitespace
+
+|:retab|	Replace tab with |'tabstop'| number of spaces >
+	:set expandtab | retab	Tabs to Spaces
+	:set noexpandtab | retab!	Spaces to Tabs
+<
+|gq|	Format (with external program) the lines that {motion} moves over
+|gw|	Format the lines that {motion} moves over <br> Split one big line
+
+|gR|	Enter Virtual Replace mode: Each character you type
+	replaces existing characters in screen space.
+
+See also:
+- s/\L
+
+==============================================================================
+pattern.txt
+
+|:nohl|	to temporarily turn off search highlights until another search command is used.
+|/\%V|	Match inside the Visual area.
+
+==============================================================================
+fold-commands
+
+==============================================================================
+windows.txt
+
+|CTRL-W_T|	Move the current window to a new tab page.
+|CTRL-W_s|	Split current window in two.
+|CTRL-W_v|	Like |:split|, but split vertically.
+|CTRL-W_n|	Create a new window and start editing an empty file in it.
+|:sp| {filename}	Open file in horizontal split.
+|:vsp| {filename}	Open file in vertical split.
+
+|:fclose|	Close floating windows.
+|:buf|	Edit buffer from the buffer list.
+
+==============================================================================
+tabpage.txt
+
+|tab|	Execute {cmd} and when it opens a new window open a new tab
+		page instead.
+|tabe|	Open a new tab page with an empty window, after the current
+|tabo|	Close all other tab pages.
+
+==============================================================================
+change.txt
+
+|CTRL-A|	Increment number.
+|CTRL-X|	Decrement number.
+|v_g_CTRL-A|	Effectively creating a [count] incrementing sequence.
+|v_g_CTRL-X|	Effectively creating a [count] decrementing sequence.
+
+==============================================================================
+repeat.txt
+
+|Q|	Repeat the last recorded register [count] times.
+
+{count}i{text}	Inserts {text} {count} times
+
+==============================================================================
+insert.txt
+
+|ins-completion|
+|i_CTRL-X_CTRL-F|	Completing file names
+|i_CTRL-X_CTRL-Z|	Stops completion without changing the text.
+
+|:r!| {cmd}	Execute {cmd} and insert its standard output below
+		the cursor or the specified line.
+
+==============================================================================
+various.txt
+
+|gx|	Opens filepath or URI under cursor with the system handler (file explorer, web browser, …).
+|CTRL-L|	Redraw status.
+|:norm| Apply normal mode command to the selection >vim
+	:'<,'>norm A;
+<
+|:!| {cmd}	Execute {cmd} with 'shell' >
+	:.!	Puts output of shell command into current buffer
+	:'<,'>!jq .	Format json lines
+<
+==============================================================================
+quickfix.txt
+
+|:copen|	Open Quickfix List
+|:lopen|	Open Location List
+
+|:cdo| {cmd}	Execute {cmd} in each valid entry in the quickfix list
+|:cfdo| {cmd}	Execute {cmd} in each file in the quickfix list.
+>
+	:grep -rn "foo"
+	:cdo s/foo/bar
+<
+|:gr|	grep
+|:grepa|	Matches appended to the current list
+
+==============================================================================
+visual.txt
+
+|v_o| |v_O|	Move cursor to another side of a visual selection
+|CTRL-V| |CTRL-Q|	Enter VISUAL-BLOCK mode
+|v_CTRL-G|	Entering SELECT mode
+|gn|	Search forward for the last used search pattern.
+==============================================================================
+cmdline.txt
+
+|CTRL-[|	Go to NORMAL mode
+|q:| |c_CTRL-F| Enter command-line window.
+		The key specified with the 'cedit' option
+|CTRL-C|	Quit command-line without executing
+		can be ch
+CTRL-\ e {expr}	Evaluate {expr} and replace the whole command line with the
+		result.
+
+|:so%|	Source current file
+
+|:e!|	Undo all changes
+|:earlier|	Undo history >vim
+	:earlier 1h
+<
+|:later|	Undo history >vim
+	 :later 2m
+<
+|c_CTRL-R_CTRL-W|	Insert word under cursor into command prompt
+
+|:m|	Move lines >
+	:m +{count}	Move the current line {count} lines down
+	:m -{count}	Move the current line {count - 1} lines up
+	:m {num}	Move the current line to the {num} line
+<
+
+|:star| Same as |'<,'>| >vim
+	:*s/foo/bar
+<
+
+See also:
+- cmdline-ranges
+
+==============================================================================
+gui.txt
+
+==============================================================================
+terminal.txt
+
+|CTRL-\_CTRL-N| Quit terminal mode
+
+|CTRL-W "|(followed by the register) Paste from a register into the terminal window
+
+==============================================================================
+Options
+ >
+	:set conceallevel=0	" usefull for help filetypes
+	:set ignorecase		" for case insensitive searching
+	:set smartcase		" to override case insensitivity
+	:set ve=all	Virtual " text (all visible spaces is accessable)
+	:set ve=onemore		" virtual text (additional space at the end)
+
+	:set cc=+1		" highlight column after 'textwidth'
+	:set cc=+1,+2,+3	" highlight three columns after 'textwidth'
+<
+See also:
+- modeline
+
+==============================================================================
+Scripting
+
+Create autocmd >vim
+	augroup mine | au BufWrite * make | augroup END
+< Delete autocmd >vim
+	au! mine
+<
+Set shell filetype for blank file.
+Put to the bottom of a file: >sh
+	# vim: set ft=sh:
+<
+Put the output of an external command to a new buffer (redirecting to qf) >vim
+	:new | r! cc -o main main.c
+	"Add the newest created buffer to the quickfix
+	:cad
+
+	:new | exe 'r! cc -Wall -Wextra -o main main.c' | cad
+
+	:cex system('ls -la')
+
+	:hor te ls -la
+<
+Reading from stdin >sh
+	vim <(ls -la)
+	ls -la | vi -
+
+	vim -b	# edit binary using xxd-format!
+
+<
+==============================================================================
+Other
+
+- vvars.txt
+- tips.txt
+  - rename-files
+- lua-guide
+- glob()
+- gzip-example
+
+==============================================================================
+TODO
+
+- compiler-select
+
+==============================================================================
+FAQ
+
+- Q: What is the difference between location list and quickfix list in vim?
+- A: The location list is local to the current window so you can have as many
+     location lists as windows.
+     The quickfix list is global so you can't have more than one available
+     at a time.
+
+vim:tw=78:isk=!-~,^*,^\|,^\":ts=8:noet:ft=help:norl:cole=0:

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# https://www.gnu.org/software/bash/manual/bash.html#Bash-Conditional-Expressions
+
+topic=""
+if [[ "$1" == "lang" ]]; then
+  topic=$(printf "rust\npython" | fzf);
+else
+  topic=$(curl -s cht.sh/:list | fzf -q "$1");
+fi
+
+stty sane;
+
+if [[ -z "$topic" ]]; then
+  exit 0;
+fi
+
+sheet=$(curl -s cht.sh/$topic/:list | fzf);
+
+if [[ -z "$sheet" ]]; then
+  curl -s cht.sh/$topic?style=rrt | less -R;
+  exit 0;
+fi
+
+curl -s cht.sh/$topic/$sheet?style=rrt | less -R;
+
+# vim: set ft=sh:

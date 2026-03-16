@@ -1,0 +1,11 @@
+#!/bin/sh
+
+NOTES_DIR=$HOME/My_Drive/Notes
+NOTES=
+
+for note in "$@"
+do
+  NOTES="$NOTES $NOTES_DIR/$note"
+done
+
+vim -p $NOTES
