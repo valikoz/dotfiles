@@ -1,4 +1,5 @@
 .Xresources|symlink|
+.bash_profile|symlink|
 .bashrc|symlink|
 .emacs|symlink|
 .gitconfig|symlink|
