@@ -9,7 +9,7 @@ set belloff=all
 set dir=/var/tmp//,/tmp
 set incsearch
 set breakindent
-set clipboard=unnamed
+set clipboard=unnamedplus
 set cmdheight=1
 set cmdwinheight=3
 "set completeopt=fuzzy,menu,menuone,noselect,noinsert "preview
@@ -66,10 +66,11 @@ let &t_EI="\e[2 q"
 
 if $TERM_PROGRAM!='Apple_Terminal'
   set termguicolors "enable 24-bit RGB color in the TUI
-  set lines=35 columns=115
-  set gfn=JetBrainsMonoNLNFM-Regular:h16
-  set gfw=JetBrainsMonoNLNFM-Bold
 endif
+" Macvim
+" set lines=35 columns=115
+" set gfn=JetBrainsMonoNLNFM-Regular:h16
+" set gfw=JetBrainsMonoNLNFM-Bold
 
 command DelMarks :delm a-zA-Z
 command Vimrc :e ~/.vimrc

@@ -1,58 +1,34 @@
-# Enable the subsequent settings only in interactive sessions
-case $- in
-  *i*) ;;
-    *) return;;
-esac
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
 HISTCONTROL=ignoreboth # don't put duplicate lines or lines starting with space in the history
-
 shopt -s histappend # append to the history file, don't overwrite it
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+# shopt -s checkwinsize
 
 GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # TERM="xterm-256color"
 # TERM="tmux-256color" # dublicate command in nvim terminal!?
 
 # PS1='\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
-PS1='\u:\W\$ '
-export EDITOR='nvim'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias gnome-control-center='XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
+PS1='[\u@\h \W]\$ '
+export EDITOR='vim'
 
-# alias ls='ls --color=auto'
-# alias lg='lazygit -ucd $HOME/.config/lazygit'
-
-alias mvim='NVIM_APPNAME=mvim nvim'
-alias bashconfig="$EDITOR -o $HOME/.bashrc $HOME/.bash_profile"
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
-alias server='python3 -m http.server'
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 lg() { lazygit -ucd "$HOME/.config/lazygit" "$@"; }
 export -f lg
 
-function fw {
-  aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
-}
-
-function cx() { cd "$@" && ls; }
-
-function fcd() {
-  cd "$(find . -type d -not -path '*/.*' $@ | fzf)" && ls -la
-}
-
-function f() {
-  echo "$(find . -type f -not -path '*/.*' $@ | fzf)" | pbcopy
-}
-
-function fe() {
-  $EDITOR "$(find . -type f -not -path '*/.*' $@ | fzf)"
-}
+PATH=$PATH:"$HOME/.local/node-v24.11.1-linux-x64/bin/"
+PATH=$PATH:"$HOME/.local/bin/"
+PATH=$PATH:"$HOME/.local/platform-tools/"
 
 # https://gist.github.com/stecman/6cc2769b135f272b673a
 __ltrim_colon_completions()
@@ -101,3 +77,4 @@ _cht_complete()
     return 0
 }
 complete -F _cht_complete cht
+
