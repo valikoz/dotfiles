@@ -1,6 +1,7 @@
 .Xresources|symlink|
 .bashrc|symlink|
 .emacs|symlink|
+.gitconfig|symlink|
 .gvimrc|symlink|
 .i3status.conf|symlink|
 .tmux.conf|symlink|

@@ -1,5 +1,6 @@
 .bashrc|symlink|
 .emacs|symlink|
+.gitconfig|symlink|
 .tmux.conf|symlink|
 .vimrc|symlink|
 .vim|symlink|
