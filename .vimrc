@@ -6,10 +6,13 @@ if exists("&autocomplete")
   set autocomplete
 endif
 set belloff=all
-set dir=/var/tmp//,/tmp
+if !isdirectory($HOME . "/.vim/swap")
+  call mkdir($HOME . "/.vim/swap", "p", 0700)
+endif
+set dir=~/.vim/swap
 set incsearch
 set breakindent
-set clipboard=unnamedplus
+set clipboard=unnamed
 set cmdheight=1
 set cmdwinheight=3
 "set completeopt=fuzzy,menu,menuone,noselect,noinsert "preview
@@ -22,8 +25,11 @@ set foldlevel=99
 set foldlevelstart=4
 set foldmethod=expr
 set foldnestmax=4
+set formatoptions+=j
 "set grepformat=%f:%l:%c:%m
 "set grepprg=rg\ --vimgrep\ -uu
+set grepprg=grep\ -rn\ $*\ /dev/null
+set hidden
 set hlsearch
 set ignorecase
 set infercase
@@ -33,11 +39,13 @@ set linebreak
 set list
 set mouse=a
 set nocopyindent
+set nomodeline
 "set notimeout
 set number
 set preserveindent
 set pumheight=10
 set relativenumber
+set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,globals,localoptions,tabpages
 set scrolloff=4
 set shiftwidth=0
 set showbreak=↪\ " keep space
@@ -52,9 +60,14 @@ set tabstop=2
 set timeout timeoutlen=3000 ttimeoutlen=100
 set title
 set undofile
+if !isdirectory($HOME . "/.vim/undo")
+  call mkdir($HOME . "/.vim/undo", "p", 0700)
+endif
+set undodir=~/.vim/undo
 set updatetime=300
 set virtualedit=block "allow virtual editing in Visual block mode
 set wrap
+set wildmode=longest:full,full
 "set rtp+=/opt/local/share/fzf/vim
 
 let g:netrw_banner=0
@@ -66,11 +79,10 @@ let &t_EI="\e[2 q"
 
 if $TERM_PROGRAM!='Apple_Terminal'
   set termguicolors "enable 24-bit RGB color in the TUI
+  set lines=35 columns=115
+  set gfn=JetBrainsMonoNLNFM-Regular:h16
+  set gfw=JetBrainsMonoNLNFM-Bold
 endif
-" Macvim
-" set lines=35 columns=115
-" set gfn=JetBrainsMonoNLNFM-Regular:h16
-" set gfw=JetBrainsMonoNLNFM-Bold
 
 command DelMarks :delm a-zA-Z
 command Vimrc :e ~/.vimrc
@@ -83,34 +95,34 @@ command Format :silent! %s/\s\+$//e
 
 command Retab
   \ if &expandtab == v:true
-  \ |		set noexpandtab  | retab!
-  \ |	else
-  \ |		set expandtab | retab
-  \ |	endif
+  \ |   set noexpandtab  | retab!
+  \ | else
+  \ |   set expandtab | retab
+  \ | endif
 
 "Toggle line numbers
 command Ln
   \ if &rnu != 1 && &nu != 1
-  \ |		set   nu   rnu
-  \ |	else
-  \ |		set nonu nornu
-  \ |	endif
+  \ |   set   nu   rnu
+  \ | else
+  \ |   set nonu nornu
+  \ | endif
 
 nnoremap <space>w <Cmd>w<CR>
 nnoremap <space>m <Cmd>make!<CR>
 "Highlight a word under cursor
 nnoremap <space>* <Cmd>let @/=expand('<cword>') <bar> set hls<CR>
 "Toggle netrw
-nnoremap <space>e	<Cmd>exe (&ft == 'netrw' ? 'sil! e #' : 'e %:p:h')<CR>
+nnoremap <space>e <Cmd>exe (&ft == 'netrw' ? 'sil! e #' : 'e %:p:h')<CR>
 noremap ' `
 
 noremap <C-s> :sh<cr>
-tmap <C-H>	<C-\><C-n>
-imap <S-Tab>	<C-V><Tab>
+tmap <C-H>  <C-\><C-n>
+imap <S-Tab>  <C-V><Tab>
 
-inoremap <C-]>	<C-X><C-]>
-inoremap <C-F>	<C-X><C-F>
-inoremap <C-L>	<C-X><C-L>
+inoremap <C-]>  <C-X><C-]>
+inoremap <C-F>  <C-X><C-F>
+inoremap <C-L>  <C-X><C-L>
 
 function! s:BlankUp() abort
   return 'put!=repeat(nr2char(10), v:count1)|silent '']+'
@@ -126,43 +138,44 @@ nnoremap ]q :cn<cr>
 nnoremap [q :cp<cr>
 
 "Expand Enter
-"imap <M-CR>	<c-g>u<CR><Cmd>normal! ====<CR><up><end><CR>
+"imap <M-CR>  <c-g>u<CR><Cmd>normal! ====<CR><up><end><CR>
+cnoremap <C-D> <Del>
 
-vmap <S-Tab>	<gv
-vmap <Tab>	>gv
-xmap +	g<C-a>gv
-xmap -	g<C-x>gv
+vmap <S-Tab>  <gv
+vmap <Tab>  >gv
+xmap +  g<C-a>gv
+xmap -  g<C-x>gv
 
 "Resize windows
 "The .. operator is preferred, but only supported in since Vim 8.1.1114
-nmap <M-e>	<cmd>execute 'resize -' . (v:count > 0 ? v:count : '2')<CR>
-nmap <M-s>	<cmd>execute 'vertical resize -' . (v:count > 0 ? v:count : '2')<CR>
-nmap <M-d>	<cmd>execute 'resize +' . (v:count > 0 ? v:count : '2')<CR>
-nmap <M-f>	<cmd>execute 'vertical resize +' . (v:count > 0 ? v:count : '2')<CR>
+nmap <M-e>  <cmd>execute 'resize -' . (v:count > 0 ? v:count : '2')<CR>
+nmap <M-s>  <cmd>execute 'vertical resize -' . (v:count > 0 ? v:count : '2')<CR>
+nmap <M-d>  <cmd>execute 'resize +' . (v:count > 0 ? v:count : '2')<CR>
+nmap <M-f>  <cmd>execute 'vertical resize +' . (v:count > 0 ? v:count : '2')<CR>
 
 "Keep selection while moving cursor
 "With <Cmd> tricks with |gv| are not needed, see :h <Cmd>.
 "The command is also not echo'ed, no need for <silent>.
-vnoremap <C-j>	<Cmd>execute 'normal ' . v:count1 . 'jo' . v:count1 . 'jo'<CR>
-vnoremap <C-k>	<Cmd>execute 'normal ' . v:count1 . 'ko' . v:count1 . 'ko'<CR>
-vnoremap <C-l>	<Cmd>execute 'normal ' . v:count1 . 'lo' . v:count1 . 'lo'<CR>
-vnoremap <C-h>	<Cmd>execute 'normal ' . v:count1 . 'ho' . v:count1 . 'ho'<CR>
+vnoremap <C-j>  <Cmd>execute 'normal ' . v:count1 . 'jo' . v:count1 . 'jo'<CR>
+vnoremap <C-k>  <Cmd>execute 'normal ' . v:count1 . 'ko' . v:count1 . 'ko'<CR>
+vnoremap <C-l>  <Cmd>execute 'normal ' . v:count1 . 'lo' . v:count1 . 'lo'<CR>
+vnoremap <C-h>  <Cmd>execute 'normal ' . v:count1 . 'ho' . v:count1 . 'ho'<CR>
 
 "Move lines up/down with no indentation
 "silent! to hide Invalid range error
-nnoremap <A-j>	<Cmd>silent! exe "m .+" . v:count1<CR>
-nnoremap <A-k>	<Cmd>silent! exe "m .-" . (v:count1 + 1)<CR>
-inoremap <A-j>	<Cmd>silent! m .+1<CR>
-inoremap <A-k>	<Cmd>silent! m .-2<CR>
-vnoremap <silent> <A-j>	:<C-u>sil! exe "'<,'>m '>+" . v:count1<CR><ESC>gv
-vnoremap <silent> <A-k>	:<C-u>sil! exe "'<,'>m '<-" . (v:count1 + 1)<CR><ESC>gv
+nnoremap <A-j>  <Cmd>silent! exe "m .+" . v:count1<CR>
+nnoremap <A-k>  <Cmd>silent! exe "m .-" . (v:count1 + 1)<CR>
+inoremap <A-j>  <Cmd>silent! m .+1<CR>
+inoremap <A-k>  <Cmd>silent! m .-2<CR>
+vnoremap <silent> <A-j> :<C-u>sil! exe "'<,'>m '>+" . v:count1<CR><ESC>gv
+vnoremap <silent> <A-k> :<C-u>sil! exe "'<,'>m '<-" . (v:count1 + 1)<CR><ESC>gv
 "Move lines up/down with indentation (might be slow)
-nmap <A-J>	<A-j>==
-nmap <A-K>	<A-k>==
-"imap <A-J>	<A-j><Esc>==gi
-"imap <A-K>	<A-k><Esc>==gi
-vmap <silent> <A-J>	<A-j>=gv
-vmap <silent> <A-K>	<A-k>=gv
+nmap <A-J>  <A-j>==
+nmap <A-K>  <A-k>==
+"imap <A-J> <A-j><Esc>==gi
+"imap <A-K> <A-k><Esc>==gi
+vmap <silent> <A-J> <A-j>=gv
+vmap <silent> <A-K> <A-k>=gv
 
 "Original cursor location in the line (or selection) by first getting it with
 "virtcol() then can be restoring with |{col}.
@@ -183,7 +196,7 @@ function SwapAll() range
   endif
 endfunction
 
-vnoremap <silent> <M-x>	:call SwapAll()<CR>
+vnoremap <silent> <M-x> :call SwapAll()<CR>
 
 augroup Custom_Colors
     autocmd!
