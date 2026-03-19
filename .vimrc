@@ -79,9 +79,6 @@ let &t_EI="\e[2 q"
 
 if $TERM_PROGRAM!='Apple_Terminal'
   set termguicolors "enable 24-bit RGB color in the TUI
-  set lines=35 columns=115
-  set gfn=JetBrainsMonoNLNFM-Regular:h16
-  set gfw=JetBrainsMonoNLNFM-Bold
 endif
 
 command DelMarks :delm a-zA-Z
