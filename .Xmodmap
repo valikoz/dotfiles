@@ -1,0 +1,6 @@
+clear Lock
+clear Control
+
+! Disable Caps_Lock
+keycode  66 = Control_L NoSymbol Control_L
+add Control = Control_L Control_R

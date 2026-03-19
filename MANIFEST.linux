@@ -1,3 +1,4 @@
+.Xmodmap|symlink|
 .Xresources|symlink|
 .bash_profile|symlink|
 .bashrc|symlink|
