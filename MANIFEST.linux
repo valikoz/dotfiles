@@ -1,6 +1,8 @@
 .Xresources|symlink|
 .bash_profile|symlink|
 .bashrc|symlink|
+.emacs.custom.el|symlink|
+.emacs.local|symlink|
 .emacs|symlink|
 .gitconfig|symlink|
 .gvimrc|symlink|
