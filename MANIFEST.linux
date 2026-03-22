@@ -17,6 +17,7 @@ bin/brightness|symlink|.local
 bin/cht|symlink|.local
 bin/launch_editor_script|symlink|.local
 bin/notes|symlink|.local
+gtk-3.0/settings.ini|symlink|.config
 i3|symlink|.config
 kritadisplayrc|symlink|.config
 kritarc|symlink|.config
