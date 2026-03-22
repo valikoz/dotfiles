@@ -3,16 +3,16 @@
 
 (add-to-list 'load-path "~/.emacs.local/")
 
-(setq default-font-size 24)
+(setq default-font-size 20)
 (setq menu-bar-mode-is-enabled 0)
 
 (cond
  ((eq system-type 'darwin)
-  (default-font-size 16))
-  (menu-bar-mode-is-enabled 1))
+  (setq default-font-size 16)
+  (setq menu-bar-mode-is-enabled 1)))
 
 (add-to-list 'default-frame-alist
-	     `(font . ,(format "JetBrainsMonoNL NF %d" default-font-size)))
+             `(font . ,(format "JetBrainsMonoNL NF %d" default-font-size)))
 
 (load-theme 'wombat t t)
 (set-face-attribute 'cursor nil :background "yellow1")
@@ -29,6 +29,11 @@
 (setq inhibit-startup-message t)
 
 (global-set-key (kbd "C-,") 'duplicate-line)
+
+(savehist-mode 1)
+
+;; C-h P ido
+(ido-mode 1)
 
 (defun my-minibuffer-setup ()
        (set (make-local-variable 'face-remapping-alist)

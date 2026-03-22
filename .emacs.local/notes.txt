@@ -1,0 +1,42 @@
+SELECTED BINDINGS
+
+Text Manipulation
+
+Key			Binding
+
+M-\			delete-horizontal-space
+
+Buffers
+
+Key		Binding
+
+C-x C-q		read-only-mode
+C-x x g		revert-buffer-quick
+C-x x r		rename-buffer
+
+Regions
+
+Key			Binding
+
+C-M-SPC			mark-sexp
+
+Repeating
+
+Key		Binding
+
+C-x ESC ESC	repeat-complex-command
+C-x M-:		repeat-complex-command
+C-x z		REPEAT
+
+Commands
+
+Key			Binding
+
+M-!			shell-command
+M-&			async-shell-command
+
+Search & Replace
+
+Key		Binding
+
+M-s .		isearch-forward-symbol-at-point

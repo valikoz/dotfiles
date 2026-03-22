@@ -1,4 +1,4 @@
-Global Bindings:
+GLOBAL BINDINGS
 
 Key			Binding
 

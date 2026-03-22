@@ -1,4 +1,4 @@
-`dired-mode' Major Mode Bindings:
+`dired-mode' MAJOR MODE BINDINGS
 
 Key                	Binding
 
