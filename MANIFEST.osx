@@ -1,5 +1,6 @@
 .bashrc|symlink|
 .emacs.custom.el|symlink|
+.emacs.d/early-init.el|symlink|
 .emacs.local|symlink|
 .emacs|symlink|
 .gitconfig|symlink|
