@@ -1,6 +1,5 @@
 " source $VIMRUNTIME/defaults.vim
 
-" set nocompatible
 " set autochdir
 if exists("&autocomplete")
   set autocomplete
@@ -40,6 +39,7 @@ set list
 set mouse=a
 set nocopyindent
 set nomodeline
+set nostartofline
 "set notimeout
 set number
 set preserveindent
@@ -81,18 +81,18 @@ if $TERM_PROGRAM!='Apple_Terminal'
   set termguicolors "enable 24-bit RGB color in the TUI
 endif
 
-command DelMarks :delm a-zA-Z
+command Delm :delm a-zA-Z
 command Vimrc :e ~/.vimrc
 command Config :e ~/.vim
 command Bashrc :e ~/.bashrc
 command Tmux :e ~/.tmux.conf
 command Rustup :silent!! rustup doc
-command SnipMateEditSnippets :e ~/.vim/pack/msanders/start/snipmate.vim/snippets/ | sp ~/.vim/snippets/
+command SnipMateEditSnippets :e ~/.vim/pack/_/start/snipmate.vim/snippets/
 command Format :silent! %s/\s\+$//e
 
 command Retab
   \ if &expandtab == v:true
-  \ |   set noexpandtab  | retab!
+  \ |   set noexpandtab | retab!
   \ | else
   \ |   set expandtab | retab
   \ | endif
@@ -100,7 +100,7 @@ command Retab
 "Toggle line numbers
 command Ln
   \ if &rnu != 1 && &nu != 1
-  \ |   set   nu   rnu
+  \ |   set nu rnu
   \ | else
   \ |   set nonu nornu
   \ | endif
@@ -114,8 +114,15 @@ nnoremap <space>e <Cmd>exe (&ft == 'netrw' ? 'sil! e #' : 'e %:p:h')<CR>
 noremap ' `
 
 noremap <C-s> :sh<cr>
-tmap <C-H>  <C-\><C-n>
-imap <S-Tab>  <C-V><Tab>
+tmap <C-H> <C-\><C-n>
+tnoremap <F29> <Esc>b
+tnoremap <F30> <Esc>f
+tnoremap <F31> <Esc>d
+tnoremap <F32> <Esc>n
+tnoremap <F33> <Esc>p
+tnoremap <F34> <Esc><C-?>
+tnoremap <F35> <Esc><C-H>
+imap <S-Tab> <C-V><Tab>
 
 inoremap <C-]>  <C-X><C-]>
 inoremap <C-F>  <C-X><C-F>
@@ -138,17 +145,10 @@ nnoremap [q :cp<cr>
 "imap <M-CR>  <c-g>u<CR><Cmd>normal! ====<CR><up><end><CR>
 cnoremap <C-D> <Del>
 
-vmap <S-Tab>  <gv
-vmap <Tab>  >gv
-xmap +  g<C-a>gv
-xmap -  g<C-x>gv
-
-"Resize windows
-"The .. operator is preferred, but only supported in since Vim 8.1.1114
-nmap <M-e>  <cmd>execute 'resize -' . (v:count > 0 ? v:count : '2')<CR>
-nmap <M-s>  <cmd>execute 'vertical resize -' . (v:count > 0 ? v:count : '2')<CR>
-nmap <M-d>  <cmd>execute 'resize +' . (v:count > 0 ? v:count : '2')<CR>
-nmap <M-f>  <cmd>execute 'vertical resize +' . (v:count > 0 ? v:count : '2')<CR>
+vmap <S-Tab> <gv
+vmap <Tab> >gv
+xmap + g<C-a>gv
+xmap - g<C-x>gv
 
 "Keep selection while moving cursor
 "With <Cmd> tricks with |gv| are not needed, see :h <Cmd>.
@@ -158,42 +158,39 @@ vnoremap <C-k>  <Cmd>execute 'normal ' . v:count1 . 'ko' . v:count1 . 'ko'<CR>
 vnoremap <C-l>  <Cmd>execute 'normal ' . v:count1 . 'lo' . v:count1 . 'lo'<CR>
 vnoremap <C-h>  <Cmd>execute 'normal ' . v:count1 . 'ho' . v:count1 . 'ho'<CR>
 
+silent! exe "set <F28>=\<Esc>,"
+silent! exe "set <F29>=\<Esc>n"
+silent! exe "set <F30>=\<Esc>p"
+silent! exe "set <F31>=\<Esc>j"
+silent! exe "set <F32>=\<Esc>k"
+silent! exe "set <F33>=\<Esc>J"
+silent! exe "set <F34>=\<Esc>K"
+
+inoremap <F28> <Cmd>t.<CR>
+nnoremap <F28> <Cmd>t.<CR>
+
 "Move lines up/down with no indentation
 "silent! to hide Invalid range error
-nnoremap <A-j>  <Cmd>silent! exe "m .+" . v:count1<CR>
-nnoremap <A-k>  <Cmd>silent! exe "m .-" . (v:count1 + 1)<CR>
-inoremap <A-j>  <Cmd>silent! m .+1<CR>
-inoremap <A-k>  <Cmd>silent! m .-2<CR>
-vnoremap <silent> <A-j> :<C-u>sil! exe "'<,'>m '>+" . v:count1<CR><ESC>gv
-vnoremap <silent> <A-k> :<C-u>sil! exe "'<,'>m '<-" . (v:count1 + 1)<CR><ESC>gv
+nnoremap <F31> <Cmd>silent! exe "m .+" . v:count1<CR>
+nnoremap <F32> <Cmd>silent! exe "m .-" . (v:count1 + 1)<CR>
+inoremap <F31> <Cmd>silent! m .+1<CR>
+inoremap <F32> <Cmd>silent! m .-2<CR>
+vnoremap <silent> <F31> :<C-u>sil! exe "'<,'>m '>+" . v:count1<CR><ESC>gv
+vnoremap <silent> <F32> :<C-u>sil! exe "'<,'>m '<-" . (v:count1 + 1)<CR><ESC>gv
 "Move lines up/down with indentation (might be slow)
-nmap <A-J>  <A-j>==
-nmap <A-K>  <A-k>==
-"imap <A-J> <A-j><Esc>==gi
-"imap <A-K> <A-k><Esc>==gi
-vmap <silent> <A-J> <A-j>=gv
-vmap <silent> <A-K> <A-k>=gv
+nmap <F33> <F31>==
+nmap <F34> <F32>==
+imap <F33> <F31><Esc>==gi
+imap <F34> <F32><Esc>==gi
+vmap <silent> <F33> <F31>=gv
+vmap <silent> <F34> <F32>=gv
 
-"Original cursor location in the line (or selection) by first getting it with
-"virtcol() then can be restoring with |{col}.
-function SwapAll() range
-  if a:firstline != a:lastline
-    if a:firstline < a:lastline
-      let first=a:firstline
-      let last=a:lastline
-    else
-      let first=a:lastline
-      let last=a:firstline
-    endif
-    while first < last
-      exec first.'m'.last.'|'.(last-1).'m'.(first-1)
-      let first=first+1
-      let last=last-1
-    endwhile
-  endif
-endfunction
-
-vnoremap <silent> <M-x> :call SwapAll()<CR>
+"Resize windows
+"The .. operator is preferred, but only supported in since Vim 8.1.1114
+nmap <M-e> <cmd>execute 'resize -' . (v:count > 0 ? v:count : '2')<CR>
+nmap <M-s> <cmd>execute 'vertical resize -' . (v:count > 0 ? v:count : '2')<CR>
+nmap <M-d> <cmd>execute 'resize +' . (v:count > 0 ? v:count : '2')<CR>
+nmap <M-f> <cmd>execute 'vertical resize +' . (v:count > 0 ? v:count : '2')<CR>
 
 augroup Custom_Colors
     autocmd!
