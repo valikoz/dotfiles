@@ -1,10 +1,18 @@
+
 SELECTED BINDINGS
+
+Movements
+
+Key			Binding
+
+M-m			back-to-indentation
 
 Text Manipulation
 
 Key			Binding
 
 M-\			delete-horizontal-space
+C-q TAB		insert 'CHARACTER TABULATION'
 
 Buffers
 
@@ -18,14 +26,14 @@ Regions
 
 Key			Binding
 
-C-M-SPC			mark-sexp
+C-M-SPC		mark-sexp
 
 Repeating
 
 Key		Binding
 
 C-x ESC ESC	repeat-complex-command
-C-x M-:		repeat-complex-command
+C-x M-:	repeat-complex-command
 C-x z		REPEAT
 
 Commands
@@ -34,6 +42,8 @@ Key			Binding
 
 M-!			shell-command
 M-&			async-shell-command
+M-|			shell-command-on-region
+C-u M-!		inserting output of a shell command to the current buffer
 
 Search & Replace
 

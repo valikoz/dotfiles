@@ -5,9 +5,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(compile-command "")
+ '(custom-enabled-themes '(wombat))
  '(display-line-numbers-type 'relative)
  '(global-display-line-numbers-mode t)
- '(package-selected-packages '(magit magit-section transient with-editor))
+ '(package-selected-packages
+   '(magit magit-section multiple-cursors transient with-editor))
  '(vc-follow-symlinks nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
