@@ -8,6 +8,7 @@
  '(custom-enabled-themes '(wombat))
  '(display-line-numbers-type 'relative)
  '(global-display-line-numbers-mode t)
+ '(indent-tabs-mode nil)
  '(package-selected-packages
    '(magit magit-section multiple-cursors transient with-editor))
  '(vc-follow-symlinks nil))

@@ -124,9 +124,9 @@ tnoremap <F34> <Esc><C-?>
 tnoremap <F35> <Esc><C-H>
 imap <S-Tab> <C-V><Tab>
 
-inoremap <C-]>  <C-X><C-]>
-inoremap <C-F>  <C-X><C-F>
-inoremap <C-L>  <C-X><C-L>
+inoremap <C-]> <C-X><C-]>
+inoremap <C-F> <C-X><C-F>
+inoremap <C-L> <C-X><C-L>
 
 function! s:BlankUp() abort
   return 'put!=repeat(nr2char(10), v:count1)|silent '']+'
@@ -159,12 +159,12 @@ vnoremap <C-l>  <Cmd>execute 'normal ' . v:count1 . 'lo' . v:count1 . 'lo'<CR>
 vnoremap <C-h>  <Cmd>execute 'normal ' . v:count1 . 'ho' . v:count1 . 'ho'<CR>
 
 silent! exe "set <F28>=\<Esc>,"
-silent! exe "set <F29>=\<Esc>n"
-silent! exe "set <F30>=\<Esc>p"
-silent! exe "set <F31>=\<Esc>j"
-silent! exe "set <F32>=\<Esc>k"
-silent! exe "set <F33>=\<Esc>J"
-silent! exe "set <F34>=\<Esc>K"
+silent! exe "set <F29>=\<Esc>j"
+silent! exe "set <F30>=\<Esc>k"
+silent! exe "set <F31>=\<Esc>n"
+silent! exe "set <F32>=\<Esc>p"
+silent! exe "set <F33>=\<Esc>N"
+silent! exe "set <F34>=\<Esc>P"
 
 inoremap <F28> <Cmd>t.<CR>
 nnoremap <F28> <Cmd>t.<CR>

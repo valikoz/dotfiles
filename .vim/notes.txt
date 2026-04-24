@@ -94,6 +94,8 @@ In Visual mode skip `g` at the start.
 |:s_I|	Don't ignore case for the pattern.
 |&| |:s|	Repeats last substitute.
 |g&|	Global substitute.
+|s/\=|	When the substitute string starts with "\=" the remainder is interpreted as an expression.
+|submatch()|	Only for an expression in a |:substitute| command or |substitute()| function.
 
 |at|	A block surrounded by xml/html tags, including the tags
 |it|	A block surrounded by xml/html tags, excluding the tags

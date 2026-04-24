@@ -2,9 +2,8 @@
 .Xresources|symlink|
 .bash_profile|symlink|
 .bashrc|symlink|
-.emacs.custom.el|symlink|
-.emacs.local|symlink|
-.emacs|symlink|
+.emacs.d/init.el|symlink|
+.emacs.d/lisp|symlink|
 .gitconfig|symlink|
 .gvimrc|symlink|
 .i3status.conf|symlink|

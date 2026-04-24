@@ -1,8 +1,8 @@
+#KeyBindings/DefaultKeyBinding.dict|symlink|Library
 .bashrc|symlink|
-.emacs.custom.el|symlink|
 .emacs.d/early-init.el|symlink|
-.emacs.local|symlink|
-.emacs|symlink|
+.emacs.d/init.el|symlink|
+.emacs.d/lisp|symlink|
 .gitconfig|symlink|
 .tmux.conf|symlink|
 .vimrc|symlink|
