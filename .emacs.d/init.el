@@ -11,13 +11,16 @@
 (setq ring-bell-function 'ignore)
 (setq completion-show-help nil)
 (setq compilation-scroll-output 1)
+(setq use-short-answers t)
 
-(setq default-font-size 20)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (show-paren-mode 1)
 (savehist-mode 1)
 (menu-bar-mode 0)
+(xterm-mouse-mode 1)
+
+(setq default-font-size 20)
 
 (cond
  ((eq system-type 'darwin)
