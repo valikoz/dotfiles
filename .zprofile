@@ -17,8 +17,6 @@ export MAGICK_HOME="$HOME/.local/ImageMagick-7.0.10"
 PATH="$PATH:$MAGICK_HOME/bin:$PATH"
 DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$MAGICK_HOME/lib"
 
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
-
 export TYPST_PACKAGE_PATH="$HOME/.local/share/typst/packages"
 export TYPST_PACKAGE_CACHE_PATH="$HOME/.cache/typst"
 
