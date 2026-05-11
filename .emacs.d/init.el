@@ -12,6 +12,7 @@
 (setq completion-show-help nil)
 (setq compilation-scroll-output 1)
 (setq use-short-answers t)
+(setq dired-dwim-target t)
 
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
@@ -54,6 +55,7 @@
 (global-set-key (kbd "M-p") 'move-text-up)
 
 (global-set-key (kbd "C-,") 'duplicate-line)
+(global-set-key (kbd "C-c ,") 'duplicate-line)
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 
 (require 'multiple-cursors)
