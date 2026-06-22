@@ -13,6 +13,7 @@
 (setq compilation-scroll-output 1)
 (setq use-short-answers t)
 (setq dired-dwim-target t)
+(setq isearch-lazy-count t)
 
 (tool-bar-mode 0)
 (scroll-bar-mode 0)

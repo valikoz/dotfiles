@@ -1,5 +1,9 @@
 " source $VIMRUNTIME/defaults.vim
 
+filetype plugin indent on
+syntax on
+colorscheme habamax
+
 " set autochdir
 if exists("&autocomplete")
   set autocomplete
@@ -41,10 +45,10 @@ set nocopyindent
 set nomodeline
 set nostartofline
 "set notimeout
-set number
+" set number
 set preserveindent
 set pumheight=10
-set relativenumber
+" set relativenumber
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,globals,localoptions,tabpages
 set scrolloff=4
 set shiftwidth=0
@@ -79,6 +83,14 @@ let &t_EI="\e[2 q"
 
 if $TERM_PROGRAM!='Apple_Terminal'
   set termguicolors "enable 24-bit RGB color in the TUI
+endif
+
+if has("gui_running")
+  if has("gui_macvim")
+    :set guifont=JetBrainsMonoNLNFM-Regular:h16
+    :set lines=999 columns=9999
+    :set macmeta
+  endif
 endif
 
 command Delm :delm a-zA-Z
@@ -141,9 +153,13 @@ nnoremap <silent> ]<Space> :<C-U>exe <SID>BlankDown()<CR>
 nnoremap ]q :cn<cr>
 nnoremap [q :cp<cr>
 
-"Expand Enter
-"imap <M-CR>  <c-g>u<CR><Cmd>normal! ====<CR><up><end><CR>
-cnoremap <C-D> <Del>
+" Readline-style mappings for command-line mode
+" start of line
+cnoremap <C-A>   <Home>
+" delete character under cursor
+cnoremap <C-D>   <Del>
+" end of line
+cnoremap <C-E>   <End>
 
 vmap <S-Tab> <gv
 vmap <Tab> >gv
@@ -212,7 +228,3 @@ augroup Netrw_Mappings
 augroup END
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-filetype plugin indent on
-syntax on
-colorscheme habamax
