@@ -6,6 +6,9 @@
 
 ;; Set up load path
 (add-to-list 'load-path lisp-dir)
+(add-to-list 'custom-theme-load-path lisp-dir)
+
+(load-theme 'gruvbox-dark-soft t)
 
 (setq inhibit-startup-message t)
 (setq ring-bell-function 'ignore)
@@ -33,8 +36,8 @@
 (add-to-list 'default-frame-alist
              `(font . ,(format "JetBrainsMonoNL NF %d" default-font-size)))
 
-(set-face-attribute 'line-number nil :inherit '(shadow default))
-(set-face-attribute 'line-number-current-line nil :inherit '(default) :slant 'normal)
+;; (set-face-attribute 'line-number nil :inherit '(shadow default))
+;; (set-face-attribute 'line-number-current-line nil :inherit '(default) :slant 'normal)
 
 (setq-default show-trailing-whitespace t)
 (add-hook 'term-mode-hook (lambda () (setq show-trailing-whitespace nil)))
@@ -51,26 +54,36 @@
 (setq completion-at-point-functions '(elisp-completion-at-point comint--complete-file-name-data)
       comint-completion-addsuffix nil)
 
-(require 'move-text)
-(global-set-key (kbd "M-n") 'move-text-down)
-(global-set-key (kbd "M-p") 'move-text-up)
+(add-hook 'minibuffer-setup-hook
+          (defun my-minibuffer-setup ()
+            (set (make-local-variable 'face-remapping-alist)
+                 '((default :height 1.1)))))
 
 (global-set-key (kbd "C-,") 'duplicate-line)
 (global-set-key (kbd "C-c ,") 'duplicate-line)
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 
-(require 'multiple-cursors)
+(require 'move-text)
+(global-set-key (kbd "M-n") 'move-text-down)
+(global-set-key (kbd "M-p") 'move-text-up)
+
+;; Load emacs Custom-settings
+(load-file custom-file)
+
+(defvar package-contents-refreshed nil)
+
+(defun ensure-installed (&rest packages)
+  (dolist (package packages)
+    (when (not (package-installed-p package))
+      (when (not package-contents-refreshed)
+        (setq package-contents-refreshed t)
+        (package-refresh-contents))
+      (package-install package))))
+
+(ensure-installed 'multiple-cursors)
+
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->")         'mc/mark-next-like-this)
 (global-set-key (kbd "C-<")         'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
 (global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
-
-(defun my-minibuffer-setup ()
-       (set (make-local-variable 'face-remapping-alist)
-          '((default :height 1.1))))
-
-(add-hook 'minibuffer-setup-hook 'my-minibuffer-setup)
-
-;; Load emacs Custom-settings
-(load-file custom-file)
