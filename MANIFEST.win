@@ -1,0 +1,9 @@
+.bash_profile|symlink|
+.bashrc|symlink|
+.emacs.d\init.el|symlink|AppData\Roaming
+.emacs.d\early-init.el|symlink|AppData\Roaming
+.emacs.d\lisp|symlink|AppData\Roaming
+.gitconfig|symlink|
+.gvimrc|symlink|
+.vimrc|symlink|
+.vim|symlink|

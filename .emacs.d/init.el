@@ -18,6 +18,8 @@
 (setq dired-dwim-target t)
 (setq isearch-lazy-count t)
 
+(setq ring-bell-function 'ignore)
+
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 (show-paren-mode 1)
@@ -31,6 +33,10 @@
  ((eq system-type 'darwin)
   (setq default-font-size 16)
   (cond ((eq initial-window-system 'ns) (menu-bar-mode 1)))
+  )
+  ((eq system-type 'windows-nt)
+   (setq default-font-size 10)
+   (cond ((eq initial-window-system 'w32) (menu-bar-mode 1)))
   ))
 
 (add-to-list 'default-frame-alist
