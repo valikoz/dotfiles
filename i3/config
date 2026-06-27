@@ -191,7 +191,7 @@ bar {
 
 hide_edge_borders both
 
-bindsym $mod+o exec "zenity --file-selection"
+bindsym $mod+Shift+o exec "zenity --file-selection"
 for_window [class="zenity"] floating enable
 bindsym $mod+F10 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym $mod+F11 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
