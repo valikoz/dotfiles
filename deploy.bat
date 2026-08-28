@@ -1,6 +1,8 @@
 @echo off
 setlocal EnableDelayedExpansion
 
+echo [WARNING] Administrator privileges required
+
 set "SCRIPT_DIR=%~dp0"
 if "%SCRIPT_DIR:~-1%"=="\" set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
 
@@ -32,7 +34,12 @@ if exist "%destination%" (
     exit /b 1
 )
 
-mklink "%destination%" "%filename%" >nul
+if exist "%filename%\NUL" (
+  mklink /d "%destination%" "%filename%" >nul
+) else (
+  mklink "%destination%" "%filename%" >nul
+)
+
 if errorlevel 1 exit /b 1
 
 echo [OK] %filename% -^> %destination%

@@ -33,6 +33,7 @@
  ((eq system-type 'darwin)
   (setq default-font-size 16)
   (cond ((eq initial-window-system 'ns) (menu-bar-mode 1)))
+  (custom-set-variables '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
   )
   ((eq system-type 'windows-nt)
    (setq default-font-size 10)

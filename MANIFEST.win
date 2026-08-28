@@ -1,5 +1,5 @@
-.bash_profile|symlink|
-.bashrc|symlink|
+#.bash_profile|symlink|
+#.bashrc|symlink|
 .emacs.d\init.el|symlink|AppData\Roaming
 .emacs.d\early-init.el|symlink|AppData\Roaming
 .emacs.d\lisp|symlink|AppData\Roaming
