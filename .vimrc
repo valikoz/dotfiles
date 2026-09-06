@@ -123,7 +123,6 @@ nnoremap <space>m <Cmd>make!<CR>
 nnoremap <space>* <Cmd>let @/=expand('<cword>') <bar> set hls<CR>
 "Toggle netrw
 nnoremap <space>e <Cmd>exe (&ft == 'netrw' ? 'sil! e #' : 'e %:p:h')<CR>
-noremap ' `
 
 noremap <C-s> :sh<cr>
 tmap <C-H> <C-\><C-n>
@@ -173,14 +172,6 @@ vnoremap <C-j>  <Cmd>execute 'normal ' . v:count1 . 'jo' . v:count1 . 'jo'<CR>
 vnoremap <C-k>  <Cmd>execute 'normal ' . v:count1 . 'ko' . v:count1 . 'ko'<CR>
 vnoremap <C-l>  <Cmd>execute 'normal ' . v:count1 . 'lo' . v:count1 . 'lo'<CR>
 vnoremap <C-h>  <Cmd>execute 'normal ' . v:count1 . 'ho' . v:count1 . 'ho'<CR>
-
-silent! exe "set <F28>=\<Esc>,"
-silent! exe "set <F29>=\<Esc>j"
-silent! exe "set <F30>=\<Esc>k"
-silent! exe "set <F31>=\<Esc>n"
-silent! exe "set <F32>=\<Esc>p"
-silent! exe "set <F33>=\<Esc>N"
-silent! exe "set <F34>=\<Esc>P"
 
 inoremap <F28> <Cmd>t.<CR>
 nnoremap <F28> <Cmd>t.<CR>
