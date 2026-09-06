@@ -21,3 +21,4 @@ i3|symlink|.config
 kritadisplayrc|symlink|.config
 kritarc|symlink|.config
 lazygit/config.yml|symlink|.config
+nvim|symlink|.config

@@ -94,3 +94,5 @@
 (global-set-key (kbd "C-<")         'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
 (global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
+
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . js-jsx-mode))

@@ -26,8 +26,9 @@ alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bol
 lg() { lazygit -ucd "$HOME/.config/lazygit" "$@"; }
 export -f lg
 
-PATH=$PATH:"$HOME/.local/node-v24.11.1-linux-x64/bin/"
-PATH=$PATH:"$HOME/.local/bin/"
+PATH=$PATH:"$HOME/.local/node-v24.20.0-linux-x64/bin"
+PATH=$PATH:"$HOME/.local//nvim-linux-x86_64/bin"
+PATH=$PATH:"$HOME/.local/bin"
 PATH=$PATH:"$HOME/.local/platform-tools/"
 
 # https://gist.github.com/stecman/6cc2769b135f272b673a
