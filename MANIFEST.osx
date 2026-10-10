@@ -11,7 +11,6 @@
 .zshrc|symlink|
 Latex_xournalpp_template.tex|symlink|
 bin/cht|symlink|.local
-bin/launch_editor_script|symlink|.local
 bin/notes|symlink|.local
 lazygit/config.yml|symlink|.config
 nvim|symlink|.config

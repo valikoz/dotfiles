@@ -1,7 +1,8 @@
 ! CTRL+ALT+C for copying and CTRL+META+V for pasting.
-! xrdb -merge <~/.Xresources
+! xrdb -merge ~/.Xresources
 
-Xft.dpi:    96
+! 96*1.5 dpi
+Xft.dpi:        144
 Xft.antialias:  1
 Xft.hinting:    1
 Xft.hintstyle:  hintmedium
@@ -36,14 +37,13 @@ URxvt*color14: #fcaf3e
 URxvt*color15: #EEEEEC
 
 URxvt.perl-ext-common:  resize-font,matcher
-URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.url-launcher: /usr/bin/firefox
 URxvt.matcher.button: 1
 
+! Disable symbols printed by Control-Shift-v
 URxvt.iso14755:    false
 URxvt.iso14755_52: false
 
-URxvt.keysym.Shift-Control-V: eval:paste_clipboard
-URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.keysym.C-minus:  resize-font:smaller
 URxvt.keysym.C-equal:  resize-font:bigger
 URxvt.keysym.C-0:      resize-font:reset

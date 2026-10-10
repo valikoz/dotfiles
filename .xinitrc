@@ -4,9 +4,7 @@ prefix="/usr"
 exec_prefix="${prefix}"
 xrdb="xrdb"
 xinitdir="/etc/X11/xinit"
-xclock="xclock"
 xterm="xterm"
-twm="twm"
 xmodmap="xmodmap"
 
 userresources="$HOME/.Xresources"
@@ -36,17 +34,18 @@ if [ -f "$userresources" ]; then
     fi
 fi
 
-if [ -f "$usermodmap" ]; then
-    "$xmodmap" "$usermodmap"
-fi
-
-# start some nice programs
-
 if [ -d "$xinitdir"/xinitrc.d ] ; then
 	for f in "$xinitdir/xinitrc.d"/?*.sh ; do
 		[ -x "$f" ] && . "$f"
 	done
 	unset f
 fi
+
+xrandr --output eDP-1 --brightness 0.5
+xinput set-prop 'SYNA2393:00 06CB:7A13 Touchpad' 'Synaptics Two-Finger Scrolling' 1, 1
+xinput set-prop 'SYNA2393:00 06CB:7A13 Touchpad' 'Synaptics Scrolling Distance' -30, 30
+xinput set-prop 'SYNA2393:00 06CB:7A13 Mouse' 'libinput Accel Speed' 1.0
+setxkbmap -layout us,ua -option grp:shifts_toggle,ctrl:nocaps,compose:ralt,terminate:ctrl_alt_bksp
+# xset r rate 200 35
 
 exec i3

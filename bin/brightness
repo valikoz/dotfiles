@@ -2,4 +2,15 @@
 
 percentage=$1
 
-xrandr --output eDP-1 --brightness $percentage
+current_brightness_percentage=$(xrandr --verbose | awk '/Brightness:/{printf "%d",$NF*100}')
+new_brightness_percentage=$(($current_brightness_percentage+$percentage))
+
+if [ $new_brightness_percentage -gt 0 -a $new_brightness_percentage -lt 100 ]; then
+  xrandr --output eDP-1 --brightness "0.$new_brightness_percentage"
+  exit 0
+elif [ $new_brightness_percentage -eq 100 ]; then
+  xrandr --output eDP-1 --brightness 1
+  exit 0
+else
+  exit 1
+fi

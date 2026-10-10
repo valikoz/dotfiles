@@ -9,16 +9,12 @@ if exists("&autocomplete")
   set autocomplete
 endif
 set belloff=all
-if !isdirectory($HOME . "/.vim/swap")
-  call mkdir($HOME . "/.vim/swap", "p", 0700)
-endif
-set dir=~/.vim/swap
 set incsearch
 set breakindent
-set clipboard=unnamed
+set clipboard=unnamedplus
 set cmdheight=1
 set cmdwinheight=3
-"set completeopt=fuzzy,menu,menuone,noselect,noinsert "preview
+"set completeopt=fuzzy,menu,menuone,noselect,noinsert preview
 set completeopt=menu,menuone,noselect,noinsert
 set conceallevel=0
 set confirm
@@ -29,8 +25,6 @@ set foldlevelstart=4
 set foldmethod=expr
 set foldnestmax=4
 set formatoptions+=j
-"set grepformat=%f:%l:%c:%m
-"set grepprg=rg\ --vimgrep\ -uu
 set grepprg=grep\ -rn\ $*\ /dev/null
 set hidden
 set hlsearch
@@ -64,15 +58,20 @@ set tabstop=2
 set timeout timeoutlen=3000 ttimeoutlen=100
 set title
 set undofile
-if !isdirectory($HOME . "/.vim/undo")
-  call mkdir($HOME . "/.vim/undo", "p", 0700)
-endif
-set undodir=~/.vim/undo
 set updatetime=300
 set virtualedit=block "allow virtual editing in Visual block mode
 set wrap
-set wildmode=longest:full,full
-"set rtp+=/opt/local/share/fzf/vim
+
+if has('unix')
+  if !isdirectory($HOME . "/.vim/swap")
+    call mkdir($HOME . "/.vim/swap", "p", 0700)
+  endif
+  set dir=~/.vim/swap
+  if !isdirectory($HOME . "/.vim/undo")
+    call mkdir($HOME . "/.vim/undo", "p", 0700)
+  endif
+  set undodir=~/.vim/undo
+endif
 
 let g:netrw_banner=0
 " let g:netrw_hide=1
@@ -124,17 +123,32 @@ nnoremap <space>* <Cmd>let @/=expand('<cword>') <bar> set hls<CR>
 "Toggle netrw
 nnoremap <space>e <Cmd>exe (&ft == 'netrw' ? 'sil! e #' : 'e %:p:h')<CR>
 
-noremap <C-s> :sh<cr>
 tmap <C-H> <C-\><C-n>
-tnoremap <F29> <Esc>b
-tnoremap <F30> <Esc>f
-tnoremap <F31> <Esc>d
-tnoremap <F32> <Esc>n
-tnoremap <F33> <Esc>p
-tnoremap <F34> <Esc><C-?>
-tnoremap <F35> <Esc><C-H>
 imap <S-Tab> <C-V><Tab>
 
+"" Uncomment, when switch to a better terminal
+
+"noremap <C-s> :sh<cr>
+""Duplicate line
+"inoremap <C-,> <Cmd>t.<CR>
+"nnoremap <C-,> <Cmd>t.<CR>
+""Move lines up/down with no indentation
+""silent! to hide Invalid range error
+"nnoremap <M-n> <Cmd>silent! exe "m .+" . v:count1<CR>
+"nnoremap <M-p> <Cmd>silent! exe "m .-" . (v:count1 + 1)<CR>
+"inoremap <M-n> <Cmd>silent! m .+1<CR>
+"inoremap <M-p> <Cmd>silent! m .-2<CR>
+"vnoremap <silent> <M-n> :<C-u>sil! exe "'<,'>m '>+" . v:count1<CR><ESC>gv
+"vnoremap <silent> <M-p> :<C-u>sil! exe "'<,'>m '<-" . (v:count1 + 1)<CR><ESC>gv
+""Move lines up/down with indentation (might be slow)
+"nmap <M-N> <M-n>==
+"nmap <M-P> <M-p>==
+"imap <M-N> <M-n><Esc>==gi
+"imap <M-P> <M-p><Esc>==gi
+"vmap <silent> <M-N> <M-n>=gv
+"vmap <silent> <M-P> <M-p>=gv
+
+"Completion
 inoremap <C-]> <C-X><C-]>
 inoremap <C-F> <C-X><C-F>
 inoremap <C-L> <C-X><C-L>
@@ -172,25 +186,6 @@ vnoremap <C-j>  <Cmd>execute 'normal ' . v:count1 . 'jo' . v:count1 . 'jo'<CR>
 vnoremap <C-k>  <Cmd>execute 'normal ' . v:count1 . 'ko' . v:count1 . 'ko'<CR>
 vnoremap <C-l>  <Cmd>execute 'normal ' . v:count1 . 'lo' . v:count1 . 'lo'<CR>
 vnoremap <C-h>  <Cmd>execute 'normal ' . v:count1 . 'ho' . v:count1 . 'ho'<CR>
-
-inoremap <F28> <Cmd>t.<CR>
-nnoremap <F28> <Cmd>t.<CR>
-
-"Move lines up/down with no indentation
-"silent! to hide Invalid range error
-nnoremap <F31> <Cmd>silent! exe "m .+" . v:count1<CR>
-nnoremap <F32> <Cmd>silent! exe "m .-" . (v:count1 + 1)<CR>
-inoremap <F31> <Cmd>silent! m .+1<CR>
-inoremap <F32> <Cmd>silent! m .-2<CR>
-vnoremap <silent> <F31> :<C-u>sil! exe "'<,'>m '>+" . v:count1<CR><ESC>gv
-vnoremap <silent> <F32> :<C-u>sil! exe "'<,'>m '<-" . (v:count1 + 1)<CR><ESC>gv
-"Move lines up/down with indentation (might be slow)
-nmap <F33> <F31>==
-nmap <F34> <F32>==
-imap <F33> <F31><Esc>==gi
-imap <F34> <F32><Esc>==gi
-vmap <silent> <F33> <F31>=gv
-vmap <silent> <F34> <F32>=gv
 
 "Resize windows
 "The .. operator is preferred, but only supported in since Vim 8.1.1114

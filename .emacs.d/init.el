@@ -1,3 +1,4 @@
+(setq warning-suppress-log-types '((files missing-lexbind-cookie)))
 (setq lisp-dir (expand-file-name "lisp" user-emacs-directory))
 
 ;; Keep emacs Custom-settings in separate file
@@ -21,7 +22,6 @@
 (setq ring-bell-function 'ignore)
 
 (tool-bar-mode 0)
-(scroll-bar-mode 0)
 (show-paren-mode 1)
 (savehist-mode 1)
 (menu-bar-mode 0)
@@ -96,3 +96,5 @@
 (global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
 
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . js-jsx-mode))
+(add-hook 'c-mode-hook (lambda () (c-toggle-comment-style -1)))
+
