@@ -9,8 +9,6 @@
 (add-to-list 'load-path lisp-dir)
 (add-to-list 'custom-theme-load-path lisp-dir)
 
-(load-theme 'gruvbox-dark-soft t)
-
 (setq inhibit-startup-message t)
 (setq ring-bell-function 'ignore)
 (setq completion-show-help nil)

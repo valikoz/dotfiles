@@ -37,7 +37,7 @@ URxvt*color14: #fcaf3e
 URxvt*color15: #EEEEEC
 
 URxvt.perl-ext-common:  resize-font,matcher
-URxvt.url-launcher: /usr/bin/firefox
+URxvt.url-launcher: /usr/bin/firefox --new-tab
 URxvt.matcher.button: 1
 
 ! Disable symbols printed by Control-Shift-v
