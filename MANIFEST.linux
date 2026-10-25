@@ -1,4 +1,3 @@
-.Xmodmap|symlink|
 .Xresources|symlink|
 .bash_profile|symlink|
 .bashrc|symlink|
@@ -12,13 +11,9 @@
 .vimrc|symlink|
 .vim|symlink|
 .xinitrc|symlink|
-bin/brightness|symlink|.local
 bin/cht|symlink|.local
 bin/notes|symlink|.local
 gtk-3.0/settings.ini|symlink|.config
 i3|symlink|.config
-kritadisplayrc|symlink|.config
-kritarc|symlink|.config
 lazygit/config.yml|symlink|.config
-xorg.conf|symlink|/etc/X11
 nvim|symlink|.config
