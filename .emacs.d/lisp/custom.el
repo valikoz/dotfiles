@@ -10,12 +10,12 @@
  '(custom-safe-themes
    '("55c81b8ddb2b6c3fa502b1ff79fa8fed6affe362447d5e72388c7d160a2879d0"
      default))
- '(global-visual-wrap-prefix-mode t)
  '(display-line-numbers-type 'relative)
  '(global-display-line-numbers-mode nil)
+ '(global-visual-wrap-prefix-mode t)
  '(indent-tabs-mode nil)
  '(package-selected-packages
-   '(magit magit-section multiple-cursors transient with-editor))
+   '(magit magit-section multiple-cursors pdf-tools transient with-editor))
  '(vc-follow-symlinks t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

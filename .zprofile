@@ -39,7 +39,5 @@ export REPO_OS_OVERRIDE="macosx"
 
 # export SSLKEYLOGFILE="$HOME/docs/sslkeylogfile.log"
 
-# Svelte stuff
-# export LAUNCH_EDITOR=launch_editor_script
 export PATH
 export DYLD_LIBRARY_PATH

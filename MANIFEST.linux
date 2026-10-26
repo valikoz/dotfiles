@@ -12,8 +12,8 @@
 .vim|symlink|
 .xinitrc|symlink|
 bin/cht|symlink|.local
-bin/notes|symlink|.local
 gtk-3.0/settings.ini|symlink|.config
 i3|symlink|.config
 lazygit/config.yml|symlink|.config
 nvim|symlink|.config
+mpv|symlink|.config
