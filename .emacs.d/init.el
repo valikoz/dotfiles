@@ -96,3 +96,8 @@
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . js-jsx-mode))
 (add-hook 'c-mode-hook (lambda () (c-toggle-comment-style -1)))
 
+(defun zathura-synctex-forward(pdf-file-name)
+  (interactive "fEnter file name: ")
+  (async-shell-command
+   (format "zathura --synctex-forward %d:0:\"%s\" -x \"emacsclient +%%{line} %%{input}\" %s" (line-number-at-pos) (buffer-file-name) pdf-file-name)
+   ))

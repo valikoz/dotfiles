@@ -13,29 +13,17 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:JetBrainsMonoNL NF Regular 16
+font pango:JetBrainsMonoNL NF Regular 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex --autostart --environment i3
-
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
-
 # Adjust volume using alsamixer.
-set $refresh_i3status killall -SIGUSR1 i3status
+set $refresh_i3status pkill -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 2dB+   && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 2dB-   && $refresh_i3status
 bindsym XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle && $refresh_i3status
@@ -191,4 +179,6 @@ for_window [class="zenity"] floating enable
 bindsym $mod+Shift+b exec "boomer"
 bindsym $mod+0 exec "setxkbmap -layout us,ua -option grp:shifts_toggle"
 bindsym $mod+9 exec "setxkbmap -layout cz,us -option grp:shifts_toggle"
+focus_follows_mouse no
+bindsym --release $mod+Escape exec "/usr/bin/i3lock -ekf -i $HOME/Pictures/meditate-black-bottom_right_3840x2160.png"
 

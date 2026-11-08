@@ -2,7 +2,6 @@
 
 filetype plugin indent on
 syntax on
-colorscheme habamax
 
 " set autochdir
 if exists("&autocomplete")
@@ -14,7 +13,6 @@ set breakindent
 set clipboard=unnamedplus
 set cmdheight=1
 set cmdwinheight=3
-"set completeopt=fuzzy,menu,menuone,noselect,noinsert preview
 set completeopt=menu,menuone,noselect,noinsert
 set conceallevel=0
 set confirm
@@ -36,7 +34,7 @@ set linebreak
 set list
 set mouse=a
 set nocopyindent
-set nomodeline
+set nomodelineexpr
 set nostartofline
 "set notimeout
 " set number
@@ -44,7 +42,7 @@ set preserveindent
 set pumheight=10
 " set relativenumber
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,globals,localoptions,tabpages
-set scrolloff=4
+set scrolloff=0
 set shiftwidth=0
 set showbreak=↪\ " keep space
 set showtabline=2
@@ -61,6 +59,7 @@ set undofile
 set updatetime=300
 set virtualedit=block "allow virtual editing in Visual block mode
 set wrap
+set wildmode=full:lastused
 
 if has('unix')
   if !isdirectory($HOME . "/.vim/swap")
@@ -74,6 +73,7 @@ if has('unix')
 endif
 
 let g:netrw_banner=0
+let g:netrw_keepdir=0
 " let g:netrw_hide=1
 " let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
 "Change the cursor between normal and insert modes
@@ -97,9 +97,9 @@ command Vimrc :e ~/.vimrc
 command Config :e ~/.vim
 command Bashrc :e ~/.bashrc
 command Tmux :e ~/.tmux.conf
-command Rustup :silent!! rustup doc
-command SnipMateEditSnippets :e ~/.vim/pack/_/start/snipmate.vim/snippets/
 command Format :silent! %s/\s\+$//e
+command Date :norm msHmtgg/Last [cC]hange:\s*/e+1<CR>"_D"=strftime("%Y %b %d")<CR>p'tzt`s
+command SnipMateEditSnippets :e ~/.vim/pack/_/start/snipmate.vim/snippets/
 
 command Retab
   \ if &expandtab == v:true
@@ -116,12 +116,31 @@ command Ln
   \ |   set nonu nornu
   \ | endif
 
+function! Synctex(filepath)
+  execute "call system('zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . bufname('%') . " -x \"vim --servername gvim --remote +%{line} %{input}\" " . a:filepath . " &')"
+  redraw!
+endfunction
+
+command -nargs=1 -complete=file Synctex :call Synctex(fnamemodify(<q-args>, ":p"))
+
 nnoremap <space>w <Cmd>w<CR>
 nnoremap <space>m <Cmd>make!<CR>
 "Highlight a word under cursor
 nnoremap <space>* <Cmd>let @/=expand('<cword>') <bar> set hls<CR>
 "Toggle netrw
 nnoremap <space>e <Cmd>exe (&ft == 'netrw' ? 'sil! e #' : 'e %:p:h')<CR>
+nnoremap <space>s :sil cex system('')<C-F><Left>i
+
+" function! AsyncJob(cmd)
+"   let s:buf_name = 'dummy'
+"   if bufexists(s:buf_name)
+"     let s:bufnr = bufnr(s:buf_name)
+"   endif
+
+"   let g:dummy = job_start(a:cmd, { 'err_io': 'buffer', 'out_io': 'buffer', 'err_name': s:buf_name, 'out_name': s:buf_name, 'pty': 1, 'out_msg': 0})
+" endfunction
+
+" command -nargs=* -complete=shellcmd Dummy :call AsyncJob(<q-args>)
 
 tmap <C-H> <C-\><C-n>
 imap <S-Tab> <C-V><Tab>
@@ -153,6 +172,9 @@ inoremap <C-]> <C-X><C-]>
 inoremap <C-F> <C-X><C-F>
 inoremap <C-L> <C-X><C-L>
 
+nnoremap <silent> [<Space> :<C-U>exe <SID>BlankUp()<CR>
+nnoremap <silent> ]<Space> :<C-U>exe <SID>BlankDown()<CR>
+
 function! s:BlankUp() abort
   return 'put!=repeat(nr2char(10), v:count1)|silent '']+'
 endfunction
@@ -161,18 +183,20 @@ function! s:BlankDown() abort
   return 'put =repeat(nr2char(10), v:count1)|silent ''[-'
 endfunction
 
-nnoremap <silent> [<Space> :<C-U>exe <SID>BlankUp()<CR>
-nnoremap <silent> ]<Space> :<C-U>exe <SID>BlankDown()<CR>
 nnoremap ]q :cn<cr>
 nnoremap [q :cp<cr>
 
 " Readline-style mappings for command-line mode
 " start of line
-cnoremap <C-A>   <Home>
+cnoremap <C-A> <Home>
 " delete character under cursor
-cnoremap <C-D>   <Del>
+cnoremap <C-D> <Del>
 " end of line
-cnoremap <C-E>   <End>
+cnoremap <C-E> <End>
+
+" Scrolling in Insert mode
+inoremap <C-E> <C-X><C-E>
+inoremap <C-Y> <C-X><C-Y>
 
 vmap <S-Tab> <gv
 vmap <Tab> >gv
@@ -194,11 +218,7 @@ nmap <M-s> <cmd>execute 'vertical resize -' . (v:count > 0 ? v:count : '2')<CR>
 nmap <M-d> <cmd>execute 'resize +' . (v:count > 0 ? v:count : '2')<CR>
 nmap <M-f> <cmd>execute 'vertical resize +' . (v:count > 0 ? v:count : '2')<CR>
 
-augroup Custom_Colors
-    autocmd!
-    " autocmd ColorScheme * hi Visual ctermfg=NONE guifg=NONE guibg=#4f5258
-    autocmd ColorScheme * hi! link netrwMarkFile Search
-augroup END
+nnoremap <silent> <C-l> <Cmd>nohl<CR><C-l>
 
 let g:space_char = nr2char(32)
 augroup Terminal_Settings
@@ -214,3 +234,30 @@ augroup Netrw_Mappings
 augroup END
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" vim -b : edit binary using xxd-format!
+augroup Binary
+  autocmd!
+  autocmd BufReadPre  *.bin set binary
+  autocmd BufReadPost *.bin
+    \ if &binary
+    \ |   execute "silent %!xxd -c 32"
+    \ |   set filetype=xxd
+    \ |   redraw
+    \ | endif
+  autocmd BufWritePre *.bin
+    \ if &binary
+    \ |   let s:view = winsaveview()
+    \ |   execute "silent %!xxd -r -c 32"
+    \ | endif
+  autocmd BufWritePost *.bin
+    \ if &binary
+    \ |   execute "silent %!xxd -c 32"
+    \ |   set nomodified
+    \ |   call winrestview(s:view)
+    \ |   redraw
+    \ | endif
+augroup END
+
+colorscheme habamax
+hi! link netrwMarkFile Search

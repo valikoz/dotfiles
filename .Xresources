@@ -1,8 +1,9 @@
 ! CTRL+ALT+C for copying and CTRL+META+V for pasting.
 ! xrdb -merge ~/.Xresources
+! <C-S> stops transfer towards a terminal (the "freeze"). <C-Q> resumes the transfer.
 
-! 96*1.5 dpi
-Xft.dpi:        144
+! 96*2 dpi
+Xft.dpi:        192
 Xft.antialias:  1
 Xft.hinting:    1
 Xft.hintstyle:  hintmedium
@@ -11,7 +12,7 @@ URxvt.termName: rxvt
 URxvt*depth: 32
 URxvt.transparent: false
 ! URxvt.font: xft:monospace:size=22
-URxvt.font: xft:JetBrainsMonoNL NF:style=Regular:size=22
+URxvt.font: xft:JetBrainsMonoNL NF:style=Regular:size=12
 URxvt.scrollBar: false
 ! URxvt.letterSpace: -1
 ! URxvt.lineSpace: -1

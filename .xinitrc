@@ -41,7 +41,7 @@ if [ -d "$xinitdir"/xinitrc.d ] ; then
 	unset f
 fi
 
-xrandr --output eDP-1 --brightness 0.5
+# xrandr --output eDP-1 --brightness 0.5
 xinput set-prop 'SYNA2393:00 06CB:7A13 Touchpad' 'Synaptics Two-Finger Scrolling' 1, 1
 xinput set-prop 'SYNA2393:00 06CB:7A13 Touchpad' 'Synaptics Scrolling Distance' -30, 30
 xinput set-prop 'SYNA2393:00 06CB:7A13 Mouse' 'libinput Accel Speed' 1.0
