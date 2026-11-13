@@ -25,7 +25,7 @@
 (menu-bar-mode 0)
 (xterm-mouse-mode 1)
 
-(setq default-font-size 20)
+(setq default-font-size 14)
 
 (cond
  ((eq system-type 'darwin)

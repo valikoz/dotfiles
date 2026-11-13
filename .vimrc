@@ -131,17 +131,6 @@ nnoremap <space>* <Cmd>let @/=expand('<cword>') <bar> set hls<CR>
 nnoremap <space>e <Cmd>exe (&ft == 'netrw' ? 'sil! e #' : 'e %:p:h')<CR>
 nnoremap <space>s :sil cex system('')<C-F><Left>i
 
-" function! AsyncJob(cmd)
-"   let s:buf_name = 'dummy'
-"   if bufexists(s:buf_name)
-"     let s:bufnr = bufnr(s:buf_name)
-"   endif
-
-"   let g:dummy = job_start(a:cmd, { 'err_io': 'buffer', 'out_io': 'buffer', 'err_name': s:buf_name, 'out_name': s:buf_name, 'pty': 1, 'out_msg': 0})
-" endfunction
-
-" command -nargs=* -complete=shellcmd Dummy :call AsyncJob(<q-args>)
-
 tmap <C-H> <C-\><C-n>
 imap <S-Tab> <C-V><Tab>
 

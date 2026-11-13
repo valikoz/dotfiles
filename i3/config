@@ -177,8 +177,8 @@ hide_edge_borders both
 bindsym $mod+Shift+o exec "zenity --file-selection"
 for_window [class="zenity"] floating enable
 bindsym $mod+Shift+b exec "boomer"
-bindsym $mod+0 exec "setxkbmap -layout us,ua -option grp:shifts_toggle"
-bindsym $mod+9 exec "setxkbmap -layout cz,us -option grp:shifts_toggle"
+bindsym $mod+0 exec "setxkbmap -layout us,ua -option grp:shifts_toggle,ctrl:nocaps,compose:ralt,terminate:ctrl_alt_bksp"
+bindsym $mod+9 exec "setxkbmap -layout us,cz -option grp:shifts_toggle,ctrl:nocaps,compose:ralt,terminate:ctrl_alt_bksp"
 focus_follows_mouse no
 bindsym --release $mod+Escape exec "/usr/bin/i3lock -ekf -i $HOME/Pictures/meditate-black-bottom_right_3840x2160.png"
 
